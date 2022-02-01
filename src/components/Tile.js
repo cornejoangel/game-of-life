@@ -10,7 +10,7 @@ const Tile = (props) => {
     <button
       type="button"
       className={`tile ${on ? 'on' : 'off'}`}
-      onClick={(e) => toggle(e, on)}
+      onClick={(e) => toggle(e, x, y)}
     >
       {x},{y}
     </button>

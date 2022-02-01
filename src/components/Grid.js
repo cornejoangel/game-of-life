@@ -8,7 +8,7 @@ const Grid = (props) => {
 
   let grid = '';
   grid = (
-    <div className="grid">
+    <div className="grid" onMouseLeave={(e) => toggleDrawing(e, true, true)}>
       {tileSet.map((tile) => (
         <Tile
           x={tile.x}

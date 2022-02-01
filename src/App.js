@@ -14,11 +14,29 @@ const App = () => {
     }
   }
   const [tiles, setTiles] = useState(tileArray);
+  const [drawing, setDrawing] = useState(false);
+  const [erasing, setErasing] = useState(false);
+
+  const toggleDrawing = (e, status) => {
+    let nowDrawing = false;
+    let nowErasing = false;
+    if (!status) {
+      // the tile was off so now we are turning tiles on
+      nowDrawing = true;
+    } else if (status) {
+      // the tile was on so now we are turning tiles off
+      nowErasing = true;
+    }
+    setDrawing(nowDrawing);
+    setErasing(nowErasing);
+  };
 
   const toggle = (e, x, y) => {
     const tempTiles = tiles.map((t) => {
-      if (t.x === x && t.y === y) {
-        t.on = !t.on;
+      if (t.x === x && t.y === y && drawing) {
+        t.on = true;
+      } else if (t.x === x && t.y === y && erasing) {
+        t.on = false;
       }
       return t;
     });
@@ -26,7 +44,9 @@ const App = () => {
   };
 
   const tile = <Tile x={1} y={1} toggle={toggle} />;
-  const grid = <Grid tileSet={tiles} toggle={toggle} />;
+  const grid = (
+    <Grid tileSet={tiles} toggleDrawing={toggleDrawing} toggle={toggle} />
+  );
 
   let page = '';
   page = (

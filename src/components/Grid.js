@@ -4,13 +4,19 @@ import Tile from './Tile';
 import '../styles/Grid.scss';
 
 const Grid = (props) => {
-  const { tileSet } = props;
+  const { tileSet, toggle } = props;
 
   let grid = '';
   grid = (
     <div className="grid">
       {tileSet.map((tile) => (
-        <Tile x={tile.x} y={tile.y} key={`${tile.x}${tile.y}`} />
+        <Tile
+          x={tile.x}
+          y={tile.y}
+          on={tile.on}
+          toggle={toggle}
+          key={`${tile.x}${tile.y}`}
+        />
       ))}
     </div>
   );
@@ -20,6 +26,7 @@ const Grid = (props) => {
 
 Grid.propTypes = {
   tileSet: PropTypes.array,
+  toggle: PropTypes.func,
 };
 
 export default Grid;

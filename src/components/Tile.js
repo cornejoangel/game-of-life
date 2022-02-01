@@ -3,13 +3,17 @@ import PropTypes from 'prop-types';
 import '../styles/Tile.scss';
 
 const Tile = (props) => {
-  const { x, y } = props;
+  const { x, y, on, toggle } = props;
 
   let tile = '';
   tile = (
-    <div className="tile">
+    <button
+      type="button"
+      className={`tile ${on ? 'on' : 'off'}`}
+      onClick={(e) => toggle(e, on)}
+    >
       {x},{y}
-    </div>
+    </button>
   );
 
   return tile;
@@ -18,6 +22,8 @@ const Tile = (props) => {
 Tile.propTypes = {
   x: PropTypes.number,
   y: PropTypes.number,
+  on: PropTypes.bool,
+  toggle: PropTypes.func,
 };
 
 export default Tile;

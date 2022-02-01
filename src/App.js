@@ -43,6 +43,28 @@ const App = () => {
     setTiles(tempTiles);
   };
 
+  const getNeighbors = (x, y, maxX, maxY) => {
+    const neighbors = [];
+    for (let dx = -1; dx < 2; dx += 1) {
+      for (let dy = -1; dy < 2; dy += 1) {
+        const newX = x + dx;
+        const newY = y + dy;
+        if (
+          dx !== dy &&
+          dx !== 0 &&
+          newX >= 0 &&
+          newX < maxX &&
+          newY >= 0 &&
+          newY < maxY
+        ) {
+          neighbors.push({ x: newX, y: newY });
+        }
+      }
+    }
+
+    return neighbors;
+  };
+
   const tile = <Tile x={1} y={1} toggle={toggle} />;
   const grid = (
     <Grid tileSet={tiles} toggleDrawing={toggleDrawing} toggle={toggle} />

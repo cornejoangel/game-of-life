@@ -17,13 +17,13 @@ const App = () => {
   const [drawing, setDrawing] = useState(false);
   const [erasing, setErasing] = useState(false);
 
-  const toggleDrawing = (e, status) => {
+  const toggleDrawing = (e, status, stop) => {
     let nowDrawing = false;
     let nowErasing = false;
-    if (!status) {
+    if (!status && !stop) {
       // the tile was off so now we are turning tiles on
       nowDrawing = true;
-    } else if (status) {
+    } else if (status && !stop) {
       // the tile was on so now we are turning tiles off
       nowErasing = true;
     }

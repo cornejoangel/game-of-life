@@ -20,6 +20,7 @@ const App = () => {
   const [drawing, setDrawing] = useState(false);
   const [erasing, setErasing] = useState(false);
   const [timeOutID, setTimeOutID] = useState('');
+  const [generation, setGeneration] = useState(0);
 
   const toggleDrawing = (e, status, stopDrawing) => {
     let nowDrawing = false;
@@ -148,6 +149,7 @@ const App = () => {
       newTiles.push(tiles[i]);
     }
     setTiles(newTiles);
+    setGeneration((prevGen) => prevGen + 1);
 
     if (singleStep) return;
 
@@ -202,6 +204,8 @@ const App = () => {
       {play}
       <p>stop button</p>
       {stop}
+      <p>generation counter</p>
+      {generation}
     </div>
   );
 

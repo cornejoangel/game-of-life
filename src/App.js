@@ -19,6 +19,7 @@ const App = () => {
   const [tiles, setTiles] = useState(tileArray);
   const [drawing, setDrawing] = useState(false);
   const [erasing, setErasing] = useState(false);
+  const [timeOutID, setTimeOutID] = useState('');
 
   const toggleDrawing = (e, status, stopDrawing) => {
     let nowDrawing = false;
@@ -147,11 +148,17 @@ const App = () => {
       newTiles.push(tiles[i]);
     }
     setTiles(newTiles);
+
+    if (singleStep) return;
+
+    const newTimeOut = setTimeout(() => {
+      gameOfLife(maxX, maxY, false);
+    }, 1000);
+    setTimeOutID(newTimeOut);
   };
 
   const stopGame = () => {
-    const x = 1;
-    console.log('stop!');
+    clearTimeout(timeOutID);
   };
 
   const tile = <Tile x={1} y={1} toggleCheck={toggleCheck} />;

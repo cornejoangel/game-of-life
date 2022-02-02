@@ -56,7 +56,7 @@ const App = () => {
 
     Used as handler for mouseOver events to only toggle when mouse has also been pressed and we are drawing or erasing depending on context
   */
-  const toggle = (e, x, y) => {
+  const toggleCheck = (e, x, y) => {
     if (drawing) {
       toggleTile(x, y, true);
     } else if (erasing) {
@@ -146,9 +146,13 @@ const App = () => {
     setTiles(newTiles);
   };
 
-  const tile = <Tile x={1} y={1} toggle={toggle} />;
+  const tile = <Tile x={1} y={1} toggleCheck={toggleCheck} />;
   const grid = (
-    <Grid tileSet={tiles} toggleDrawing={toggleDrawing} toggle={toggle} />
+    <Grid
+      tileSet={tiles}
+      toggleDrawing={toggleDrawing}
+      toggleCheck={toggleCheck}
+    />
   );
   const step = (
     <StepButton gameOfLife={gameOfLife} maxX={xLimit} maxY={yLimit} />

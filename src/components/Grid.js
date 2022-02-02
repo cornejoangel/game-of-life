@@ -4,7 +4,7 @@ import Tile from './Tile';
 import '../styles/Grid.scss';
 
 const Grid = (props) => {
-  const { tileSet, toggleDrawing, toggle } = props;
+  const { tileSet, toggleDrawing, toggleCheck } = props;
 
   let grid = '';
   grid = (
@@ -15,7 +15,7 @@ const Grid = (props) => {
           y={tile.y}
           on={tile.on}
           toggleDrawing={toggleDrawing}
-          toggle={toggle}
+          toggleCheck={toggleCheck}
           key={`${tile.x}${tile.y}`}
         />
       ))}
@@ -28,7 +28,7 @@ const Grid = (props) => {
 Grid.propTypes = {
   tileSet: PropTypes.array,
   toggleDrawing: PropTypes.func,
-  toggle: PropTypes.func,
+  toggleCheck: PropTypes.func,
 };
 
 export default Grid;

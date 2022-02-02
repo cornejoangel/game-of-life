@@ -1,11 +1,12 @@
 import { React, useState } from 'react';
 import Tile from './components/Tile';
 import Grid from './components/Grid';
+import StepButton from './components/StepButton';
 import './styles/normalize.css';
 
 const App = () => {
-  const xLimit = 10;
-  const yLimit = 10;
+  const xLimit = 5;
+  const yLimit = 5;
   const tileArray = [];
 
   for (let i = 0; i < yLimit; i += 1) {
@@ -100,16 +101,64 @@ const App = () => {
     }
     return neighbors;
   };
+
+  const gameOfLife = (maxX, maxY) => {
+    const newTiles = [];
+    const cellsToChange = [];
+    let neighbors = [];
+    let current = '';
+    let livingNeighbors = 0;
+    for (let i = 0; i < tiles.length; i += 1) {
+      current = tiles[i];
+      neighbors = getNeighbors(current.x, current.y, maxX, maxY);
+      livingNeighbors = neighbors.reduce((total, neighbor) => {
+        if (neighbor.on) {
+          return total + 1;
         }
+        return total;
+      }, 0);
+
+      if (current.on && (livingNeighbors < 2 || livingNeighbors > 3)) {
+        cellsToChange.push(current);
+      } else if (livingNeighbors === 3) {
+        cellsToChange.push(current);
       }
     }
+    while (cellsToChange.length > 0) {
+      current = cellsToChange.pop();
+      toggleTile(current.x, current.y, !current.on);
+    }
 
-    return neighbors;
+    for (let i = 0; i < tiles.length; i += 1) {
+      newTiles.push(tiles[i]);
+    }
+    setTiles(newTiles);
+
+    /*
+    iterate through all of my tiles
+    for each tile set current equal to it
+    initialise that tile's living neighbors to be 0
+    get that tile's neighbors
+    for each neighbor, check if that neighbor is on
+      if the neighbor is on, increment living neighbors
+    if the current tile is on
+      check if it needs to be turned off
+        if so add it to the list of tiles to toggle
+    or if the current tile has 3 living neighbors
+      add it to the list of tiles to toggle
+
+    loop through the list of tiles to toggle and toggle them all
+    increment generation counter if desired
+    if only doing one generation then return
+    */
   };
 
   const tile = <Tile x={1} y={1} toggle={toggle} />;
   const grid = (
     <Grid tileSet={tiles} toggleDrawing={toggleDrawing} toggle={toggle} />
+  );
+  const step = (
+    <StepButton gameOfLife={gameOfLife} maxX={xLimit} maxY={yLimit} />
   );
 
   let page = '';
@@ -119,6 +168,8 @@ const App = () => {
       {tile}
       <p>here is a grid</p>
       {grid}
+      <p>and the step button</p>
+      {step}
     </div>
   );
 

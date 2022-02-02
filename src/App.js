@@ -106,6 +106,7 @@ const App = () => {
   /*
     Parameters:
       The dimensions of the grid as two values
+      Whether we will run for a single step or indefinitely
     Iterates through every tile
       For each tile, we look at all of its neighbors and see how many are on
       If a tile is on and has less than 2 or more than 3 on neighbors we add it to an array of tiles to change
@@ -114,7 +115,7 @@ const App = () => {
       toggles each one
     Updates state of tile array
   */
-  const gameOfLife = (maxX, maxY) => {
+  const gameOfLife = (maxX, maxY, singleStep) => {
     const newTiles = [];
     const tilesToChange = [];
     let neighbors = [];
@@ -156,11 +157,21 @@ const App = () => {
     />
   );
   const step = (
-    <StepButton gameOfLife={gameOfLife} maxX={xLimit} maxY={yLimit} />
+    <StepButton
+      gameOfLife={gameOfLife}
+      maxX={xLimit}
+      maxY={yLimit}
+      singleStep
+    />
   );
 
   const play = (
-    <PlayButton gameOfLife={gameOfLife} maxX={xLimit} maxY={yLimit} />
+    <PlayButton
+      gameOfLife={gameOfLife}
+      maxX={xLimit}
+      maxY={yLimit}
+      singleStep={false}
+    />
   );
 
   let page = '';

@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const PlayButton = (props) => {
-  const { gameOfLife, maxX, maxY } = props;
+  const { gameOfLife, maxX, maxY, singleStep } = props;
   let play = '';
   play = (
     <button
       type="button"
       className="play"
-      onClick={() => gameOfLife(maxX, maxY)}
+      onClick={() => gameOfLife(maxX, maxY, singleStep)}
     >
       Play
     </button>
@@ -20,6 +20,7 @@ PlayButton.propTypes = {
   gameOfLife: PropTypes.func,
   maxX: PropTypes.number,
   maxY: PropTypes.number,
+  singleStep: PropTypes.bool,
 };
 
 export default PlayButton;

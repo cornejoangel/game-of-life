@@ -2,6 +2,7 @@ import { React, useState } from 'react';
 import Tile from './components/Tile';
 import Grid from './components/Grid';
 import StepButton from './components/StepButton';
+import PlayButton from './components/PlayButton';
 import './styles/normalize.css';
 
 const App = () => {
@@ -158,6 +159,10 @@ const App = () => {
     <StepButton gameOfLife={gameOfLife} maxX={xLimit} maxY={yLimit} />
   );
 
+  const play = (
+    <PlayButton gameOfLife={gameOfLife} maxX={xLimit} maxY={yLimit} />
+  );
+
   let page = '';
   page = (
     <div>
@@ -167,6 +172,8 @@ const App = () => {
       {grid}
       <p>and the step button</p>
       {step}
+      <p>play button</p>
+      {play}
     </div>
   );
 

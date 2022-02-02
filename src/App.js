@@ -31,18 +31,37 @@ const App = () => {
     setErasing(nowErasing);
   };
 
-  const toggle = (e, x, y) => {
+  /*
+    Parameters: 
+      a coordinate pair as two values 
+      an on status
+    Finds the associated tile and changes its on status to the provided one
+    Updates state of the tile array
+  */
+  const toggleTile = (x, y, on) => {
     const tempTiles = tiles.map((t) => {
-      if (t.x === x && t.y === y && drawing) {
-        t.on = true;
-      } else if (t.x === x && t.y === y && erasing) {
-        t.on = false;
+      if (t.x === x && t.y === y) {
+        t.on = on;
       }
       return t;
     });
     setTiles(tempTiles);
   };
 
+  /*
+    Parameter:
+      a coordinate pair as two values
+    Requests that the associated tile be toggled on or off depending on whether we are drawing or erasing
+
+    Used as handler for mouseOver events to only toggle when mouse has also been pressed and we are drawing or erasing depending on context
+  */
+  const toggle = (e, x, y) => {
+    if (drawing) {
+      toggleTile(x, y, true);
+    } else if (erasing) {
+      toggleTile(x, y, false);
+    }
+  };
   const getNeighbors = (x, y, maxX, maxY) => {
     const neighbors = [];
     for (let dx = -1; dx < 2; dx += 1) {

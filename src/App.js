@@ -62,21 +62,44 @@ const App = () => {
       toggleTile(x, y, false);
     }
   };
+
+  /*
+    Parameters: 
+      a coordinate pair as two values
+      the dimensions of the grid as two values
+    Finds every adjacent tile to the one that matches the coordinates
+    Returns an array containing all of the neighbor tiles.
+  */
   const getNeighbors = (x, y, maxX, maxY) => {
     const neighbors = [];
+    const neighborRefs = [];
+
+    // this loop finds the valid neighbor coordinates
     for (let dx = -1; dx < 2; dx += 1) {
       for (let dy = -1; dy < 2; dy += 1) {
+        // eslint-disable-next-line no-continue
+        if (dx === dy && dx === 0) continue;
         const newX = x + dx;
         const newY = y + dy;
+        if (newX >= 0 && newX < maxX && newY >= 0 && newY < maxY) {
+          neighborRefs.push({ x: newX, y: newY });
+        }
+      }
+    }
+
+    // this loop retrieves the actual tile objects for each neighbor
+    for (let i = 0; i < neighborRefs.length; i += 1) {
+      for (let j = 0; j < tiles.length; j += 1) {
         if (
-          dx !== dy &&
-          dx !== 0 &&
-          newX >= 0 &&
-          newX < maxX &&
-          newY >= 0 &&
-          newY < maxY
+          tiles[j].x === neighborRefs[i].x &&
+          tiles[j].y === neighborRefs[i].y
         ) {
-          neighbors.push({ x: newX, y: newY });
+          neighbors.push(tiles[j]);
+        }
+      }
+    }
+    return neighbors;
+  };
         }
       }
     }

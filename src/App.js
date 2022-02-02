@@ -3,6 +3,7 @@ import Tile from './components/Tile';
 import Grid from './components/Grid';
 import StepButton from './components/StepButton';
 import PlayButton from './components/PlayButton';
+import StopButton from './components/StopButton';
 import './styles/normalize.css';
 
 const App = () => {
@@ -19,13 +20,13 @@ const App = () => {
   const [drawing, setDrawing] = useState(false);
   const [erasing, setErasing] = useState(false);
 
-  const toggleDrawing = (e, status, stop) => {
+  const toggleDrawing = (e, status, stopDrawing) => {
     let nowDrawing = false;
     let nowErasing = false;
-    if (!status && !stop) {
+    if (!status && !stopDrawing) {
       // the tile was off so now we are turning tiles on
       nowDrawing = true;
-    } else if (status && !stop) {
+    } else if (status && !stopDrawing) {
       // the tile was on so now we are turning tiles off
       nowErasing = true;
     }
@@ -148,6 +149,11 @@ const App = () => {
     setTiles(newTiles);
   };
 
+  const stopGame = () => {
+    const x = 1;
+    console.log('stop!');
+  };
+
   const tile = <Tile x={1} y={1} toggleCheck={toggleCheck} />;
   const grid = (
     <Grid
@@ -174,6 +180,8 @@ const App = () => {
     />
   );
 
+  const stop = <StopButton stopGame={stopGame} />;
+
   let page = '';
   page = (
     <div>
@@ -185,6 +193,8 @@ const App = () => {
       {step}
       <p>play button</p>
       {play}
+      <p>stop button</p>
+      {stop}
     </div>
   );
 

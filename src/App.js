@@ -4,6 +4,7 @@ import Grid from './components/Grid';
 import StepButton from './components/StepButton';
 import PlayButton from './components/PlayButton';
 import StopButton from './components/StopButton';
+import ResetButton from './components/ResetButton';
 import './styles/normalize.css';
 
 const App = () => {
@@ -163,6 +164,10 @@ const App = () => {
     clearTimeout(timeOutID);
   };
 
+  const resetGame = () => {
+    console.log('reset');
+  };
+
   const tile = <Tile x={1} y={1} toggleCheck={toggleCheck} />;
   const grid = (
     <Grid
@@ -191,6 +196,8 @@ const App = () => {
 
   const stop = <StopButton stopGame={stopGame} />;
 
+  const reset = <ResetButton resetGame={resetGame} />;
+
   let page = '';
   page = (
     <div>
@@ -206,6 +213,8 @@ const App = () => {
       {stop}
       <p>generation counter</p>
       {generation}
+      <p>reset button</p>
+      {reset}
     </div>
   );
 

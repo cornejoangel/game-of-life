@@ -102,30 +102,41 @@ const App = () => {
     return neighbors;
   };
 
+  /*
+    Parameters:
+      The dimensions of the grid as two values
+    Iterates through every tile
+      For each tile, we look at all of its neighbors and see how many are on
+      If a tile is on and has less than 2 or more than 3 on neighbors we add it to an array of tiles to change
+      if a tile is off and it has exactly 3 on neighbors we add it to the array of tiles to change
+    Iterates through list of tiles to change
+      toggles each one
+    Updates state of tile array
+  */
   const gameOfLife = (maxX, maxY) => {
     const newTiles = [];
-    const cellsToChange = [];
+    const tilesToChange = [];
     let neighbors = [];
     let current = '';
-    let livingNeighbors = 0;
+    let onNeighbors = 0;
     for (let i = 0; i < tiles.length; i += 1) {
       current = tiles[i];
       neighbors = getNeighbors(current.x, current.y, maxX, maxY);
-      livingNeighbors = neighbors.reduce((total, neighbor) => {
+      onNeighbors = neighbors.reduce((total, neighbor) => {
         if (neighbor.on) {
           return total + 1;
         }
         return total;
       }, 0);
 
-      if (current.on && (livingNeighbors < 2 || livingNeighbors > 3)) {
-        cellsToChange.push(current);
-      } else if (livingNeighbors === 3) {
-        cellsToChange.push(current);
+      if (current.on && (onNeighbors < 2 || onNeighbors > 3)) {
+        tilesToChange.push(current);
+      } else if (onNeighbors === 3) {
+        tilesToChange.push(current);
       }
     }
-    while (cellsToChange.length > 0) {
-      current = cellsToChange.pop();
+    while (tilesToChange.length > 0) {
+      current = tilesToChange.pop();
       toggleTile(current.x, current.y, !current.on);
     }
 
@@ -133,24 +144,6 @@ const App = () => {
       newTiles.push(tiles[i]);
     }
     setTiles(newTiles);
-
-    /*
-    iterate through all of my tiles
-    for each tile set current equal to it
-    initialise that tile's living neighbors to be 0
-    get that tile's neighbors
-    for each neighbor, check if that neighbor is on
-      if the neighbor is on, increment living neighbors
-    if the current tile is on
-      check if it needs to be turned off
-        if so add it to the list of tiles to toggle
-    or if the current tile has 3 living neighbors
-      add it to the list of tiles to toggle
-
-    loop through the list of tiles to toggle and toggle them all
-    increment generation counter if desired
-    if only doing one generation then return
-    */
   };
 
   const tile = <Tile x={1} y={1} toggle={toggle} />;

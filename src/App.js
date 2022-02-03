@@ -62,7 +62,7 @@ const App = () => {
 
     Used as handler for mouseOver events to only toggle when mouse has also been pressed and we are drawing or erasing depending on context
   */
-  const toggleCheck = (e, x, y) => {
+  const toggleCheck = (x, y) => {
     if (drawing) {
       toggleTile(x, y, true);
     } else if (erasing) {

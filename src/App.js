@@ -7,6 +7,7 @@ import PlayButton from './components/PlayButton';
 import StopButton from './components/StopButton';
 import ResetButton from './components/ResetButton';
 import './styles/normalize.css';
+import './styles/App.scss';
 
 const App = () => {
   const xLimit = 20;
@@ -213,22 +214,16 @@ const App = () => {
 
   let page = '';
   page = (
-    <div>
-      <p>here is a tile</p>
-      {tile}
-      <p>here is a grid</p>
+    <main>
+      <menu>
+        <li>{step}</li>
+        <li>{play}</li>
+        <li>{stop}</li>
+        <li>{reset}</li>
+        <li>{generation}</li>
+      </menu>
       {grid}
-      <p>and the step button</p>
-      {step}
-      <p>play button</p>
-      {play}
-      <p>stop button</p>
-      {stop}
-      <p>generation counter</p>
-      {generation}
-      <p>reset button</p>
-      {reset}
-    </div>
+    </main>
   );
 
   return page;

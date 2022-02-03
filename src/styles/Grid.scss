@@ -3,7 +3,9 @@
   box-sizing: border-box;
   width: fit-content;
   height: fit-content;
-  box-shadow: 0 0 3px black;
+  box-shadow: 0 0 20px black;
   display: grid;
   grid-template-columns: repeat(20, auto);
+  grid-row: 1;
+  margin: 2em;
 }

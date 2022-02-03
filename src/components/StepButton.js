@@ -4,13 +4,6 @@ import PropTypes from 'prop-types';
 const StepButton = (props) => {
   const { gameOfLife, maxX, maxY, singleStep, playing } = props;
   let step = '';
-
-  // if (playing) {
-  //   step = (
-  //     <button
-  //   )
-  // }
-
   step = (
     <button
       type="button"
@@ -18,7 +11,7 @@ const StepButton = (props) => {
       disabled={!!playing}
       onClick={() => gameOfLife(maxX, maxY, singleStep)}
     >
-      Step
+      +1
     </button>
   );
 

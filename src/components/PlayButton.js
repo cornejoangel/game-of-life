@@ -10,7 +10,7 @@ const PlayButton = (props) => {
       className="play"
       onClick={() => gameOfLife(maxX, maxY, singleStep)}
     >
-      Play
+      {'>'}
     </button>
   );
   return play;

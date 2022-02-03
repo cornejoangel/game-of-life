@@ -6,7 +6,7 @@ const StopButton = (props) => {
   let stop = '';
   stop = (
     <button type="button" className="stop" onClick={() => stopGame()}>
-      Stop
+      ||
     </button>
   );
   return stop;

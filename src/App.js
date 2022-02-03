@@ -158,8 +158,16 @@ const App = () => {
     clearTimeout(timeOutID);
   };
 
+  /*
+    Stops the game and resets all state
+  */
   const resetGame = () => {
-    console.log('reset');
+    stopGame();
+    setDrawing(false);
+    setErasing(false);
+    setTimeOutID('');
+    setGeneration(0);
+    setTiles(SetupTiles(xLimit, yLimit));
   };
 
   const tile = <Tile x={1} y={1} toggleCheck={toggleCheck} />;

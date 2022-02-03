@@ -9,8 +9,8 @@ import ResetButton from './components/ResetButton';
 import './styles/normalize.css';
 
 const App = () => {
-  const xLimit = 5;
-  const yLimit = 5;
+  const xLimit = 20;
+  const yLimit = 20;
   const [tiles, setTiles] = useState(SetupTiles(xLimit, yLimit));
   const [drawing, setDrawing] = useState(false);
   const [erasing, setErasing] = useState(false);

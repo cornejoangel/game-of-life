@@ -7,6 +7,7 @@ const Tile = (props) => {
 
   let tile = '';
   tile = (
+    // eslint-disable-next-line jsx-a11y/control-has-associated-label
     <button
       type="button"
       className={`tile ${on ? 'on' : 'off'}`}
@@ -14,9 +15,7 @@ const Tile = (props) => {
       onMouseOver={() => toggleCheck(x, y)}
       onMouseUp={() => toggleDrawing(on, false)}
       onFocus={() => toggleCheck(x, y)}
-    >
-      {x},{y}
-    </button>
+    />
   );
 
   return tile;

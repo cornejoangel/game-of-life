@@ -16,7 +16,7 @@ const Grid = (props) => {
           on={tile.on}
           toggleDrawing={toggleDrawing}
           toggleCheck={toggleCheck}
-          key={`${tile.x}${tile.y}`}
+          key={`${tile.x},${tile.y}`}
         />
       ))}
     </div>

@@ -1,6 +1,5 @@
 import { React, useState } from 'react';
 import SetupTiles from './modules/SetupTIles';
-import Tile from './components/Tile';
 import Grid from './components/Grid';
 import StepButton from './components/StepButton';
 import PlayButton from './components/PlayButton';
@@ -17,6 +16,7 @@ const App = () => {
   const [erasing, setErasing] = useState(false);
   const [timeOutID, setTimeOutID] = useState('');
   const [generation, setGeneration] = useState(0);
+  const [playing, setPlaying] = useState(false);
 
   /*
     Parameters:
@@ -126,6 +126,7 @@ const App = () => {
     Updates the TimeOutID state so this can be stopped later
   */
   const gameOfLife = (maxX, maxY, singleStep) => {
+    let stillPlaying = true;
     const newTiles = [];
     const tilesToChange = [];
     let neighbors = [];
@@ -158,7 +159,12 @@ const App = () => {
     setTiles(newTiles);
     setGeneration((prevGen) => prevGen + 1);
 
-    if (singleStep) return;
+    if (singleStep) {
+      stillPlaying = false;
+      console.log('now false!');
+      return;
+    }
+    setPlaying(stillPlaying);
 
     const newTimeOut = setTimeout(() => {
       gameOfLife(maxX, maxY, false);
@@ -167,6 +173,7 @@ const App = () => {
   };
 
   const stopGame = () => {
+    setPlaying(false);
     clearTimeout(timeOutID);
   };
 
@@ -182,7 +189,6 @@ const App = () => {
     setTiles(SetupTiles(xLimit, yLimit));
   };
 
-  const tile = <Tile x={1} y={1} toggleCheck={toggleCheck} />;
   const grid = (
     <Grid
       tileSet={tiles}
@@ -195,6 +201,7 @@ const App = () => {
       gameOfLife={gameOfLife}
       maxX={xLimit}
       maxY={yLimit}
+      playing={playing}
       singleStep
     />
   );
@@ -217,8 +224,10 @@ const App = () => {
     <main>
       <menu>
         <li>{step}</li>
-        <li>{play}</li>
-        <li>{stop}</li>
+        <li>
+          {!playing && play}
+          {playing && stop}
+        </li>
         <li>{reset}</li>
         <li>{generation}</li>
       </menu>

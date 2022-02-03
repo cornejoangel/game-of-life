@@ -2,12 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const StepButton = (props) => {
-  const { gameOfLife, maxX, maxY, singleStep } = props;
+  const { gameOfLife, maxX, maxY, singleStep, playing } = props;
   let step = '';
+
+  // if (playing) {
+  //   step = (
+  //     <button
+  //   )
+  // }
+
   step = (
     <button
       type="button"
       className="step"
+      disabled={!!playing}
       onClick={() => gameOfLife(maxX, maxY, singleStep)}
     >
       Step

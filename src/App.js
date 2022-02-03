@@ -112,6 +112,10 @@ const App = () => {
     Iterates through list of tiles to change
       toggles each one
     Updates state of tile array
+    Increments the generation state
+    If this is being run as a single step, returns here
+    Calls itself recursively with a setTimeout delay
+    Updates the TimeOutID state so this can be stopped later
   */
   const gameOfLife = (maxX, maxY, singleStep) => {
     const newTiles = [];

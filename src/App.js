@@ -1,4 +1,5 @@
 import { React, useState } from 'react';
+import SetupTiles from './modules/SetupTIles';
 import Tile from './components/Tile';
 import Grid from './components/Grid';
 import StepButton from './components/StepButton';
@@ -10,14 +11,7 @@ import './styles/normalize.css';
 const App = () => {
   const xLimit = 5;
   const yLimit = 5;
-  const tileArray = [];
-
-  for (let i = 0; i < yLimit; i += 1) {
-    for (let j = 0; j < xLimit; j += 1) {
-      tileArray.push({ x: j, y: i, on: false });
-    }
-  }
-  const [tiles, setTiles] = useState(tileArray);
+  const [tiles, setTiles] = useState(SetupTiles(xLimit, yLimit));
   const [drawing, setDrawing] = useState(false);
   const [erasing, setErasing] = useState(false);
   const [timeOutID, setTimeOutID] = useState('');

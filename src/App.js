@@ -22,27 +22,6 @@ const App = () => {
   speedRef.current = speed;
 
   /*
-    Parameters:
-      the on status of the tile being targeted
-      boolean representing whether we are turning on or off
-    Turns off drawing and erasing, unless second parameter is true, 
-    in which case it turns on the appropriate state
-  */
-  const toggleDrawing = (status, startDrawing) => {
-    let nowDrawing = false;
-    let nowErasing = false;
-    if (!status && startDrawing) {
-      // the tile was off so now we are turning tiles on
-      nowDrawing = true;
-    } else if (status && startDrawing) {
-      // the tile was on so now we are turning tiles off
-      nowErasing = true;
-    }
-    setDrawing(nowDrawing);
-    setErasing(nowErasing);
-  };
-
-  /*
     Parameters: 
       a coordinate pair as two values 
       an on status
@@ -57,6 +36,35 @@ const App = () => {
       return t;
     });
     setTiles(tempTiles);
+  };
+
+  /*
+    Parameters:
+      the on status of the tile being targeted
+      boolean representing whether we are turning on or off
+    Turns off drawing and erasing, unless second parameter is true, 
+    in which case it turns on the appropriate state
+    Also toggles the specific tile
+  */
+  const toggleDrawing = (status, startDrawing, x, y) => {
+    let nowDrawing = false;
+    let nowErasing = false;
+    let tileX = null;
+    let tileY = null;
+    if (x && y) {
+      tileX = x;
+      tileY = y;
+    }
+    if (!status && startDrawing) {
+      // the tile was off so now we are turning tiles on
+      nowDrawing = true;
+    } else if (status && startDrawing) {
+      // the tile was on so now we are turning tiles off
+      nowErasing = true;
+    }
+    toggleTile(tileX, tileY, !status);
+    setDrawing(nowDrawing);
+    setErasing(nowErasing);
   };
 
   /*

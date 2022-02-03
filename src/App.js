@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useRef } from 'react';
 import SetupTiles from './modules/SetupTIles';
 import Grid from './components/Grid';
 import StepButton from './components/StepButton';
@@ -17,6 +17,9 @@ const App = () => {
   const [timeOutID, setTimeOutID] = useState('');
   const [generation, setGeneration] = useState(0);
   const [playing, setPlaying] = useState(false);
+  const [speed, setSpeed] = useState(500);
+  const speedRef = useRef();
+  speedRef.current = speed;
 
   /*
     Parameters:
@@ -132,6 +135,7 @@ const App = () => {
     let neighbors = [];
     let current = '';
     let onNeighbors = 0;
+
     for (let i = 0; i < tiles.length; i += 1) {
       current = tiles[i];
       neighbors = getNeighbors(current.x, current.y, maxX, maxY);
@@ -168,7 +172,7 @@ const App = () => {
 
     const newTimeOut = setTimeout(() => {
       gameOfLife(maxX, maxY, false);
-    }, 1000);
+    }, speedRef.current);
     setTimeOutID(newTimeOut);
   };
 
@@ -186,7 +190,12 @@ const App = () => {
     setErasing(false);
     setTimeOutID('');
     setGeneration(0);
+    setSpeed(500);
     setTiles(SetupTiles(xLimit, yLimit));
+  };
+
+  const updateSpeed = (value) => {
+    setSpeed(value);
   };
 
   const grid = (
@@ -219,6 +228,19 @@ const App = () => {
 
   const reset = <ResetButton resetGame={resetGame} />;
 
+  const speedInput = (
+    <input
+      type="range"
+      id="speed"
+      name="speed"
+      min="100"
+      max="1000"
+      value={speed}
+      step="100"
+      onChange={(e) => updateSpeed(e.target.valueAsNumber)}
+    />
+  );
+
   let page = '';
   page = (
     <main>
@@ -229,6 +251,8 @@ const App = () => {
           {playing && stop}
         </li>
         <li>{reset}</li>
+        <li>{speedInput}</li>
+        <li>{speed / 1000}s / generation</li>
         <li>{generation}</li>
       </menu>
       {grid}

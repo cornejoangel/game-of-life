@@ -17,13 +17,20 @@ const App = () => {
   const [timeOutID, setTimeOutID] = useState('');
   const [generation, setGeneration] = useState(0);
 
-  const toggleDrawing = (e, status, stopDrawing) => {
+  /*
+    Parameters:
+      the on status of the tile being targeted
+      boolean representing whether we are turning on or off
+    Turns off drawing and erasing, unless second parameter is true, 
+    in which case it turns on the appropriate state
+  */
+  const toggleDrawing = (status, startDrawing) => {
     let nowDrawing = false;
     let nowErasing = false;
-    if (!status && !stopDrawing) {
+    if (!status && startDrawing) {
       // the tile was off so now we are turning tiles on
       nowDrawing = true;
-    } else if (status && !stopDrawing) {
+    } else if (status && startDrawing) {
       // the tile was on so now we are turning tiles off
       nowErasing = true;
     }

@@ -10,9 +10,9 @@ const Tile = (props) => {
     <button
       type="button"
       className={`tile ${on ? 'on' : 'off'}`}
-      onMouseDown={(e) => toggleDrawing(e, on, false)}
+      onMouseDown={() => toggleDrawing(on, true)}
       onMouseOver={(e) => toggleCheck(e, x, y)}
-      onMouseUp={(e) => toggleDrawing(e, on, true)}
+      onMouseUp={() => toggleDrawing(on, false)}
       onFocus={(e) => toggleCheck(e, x, y)}
     >
       {x},{y}

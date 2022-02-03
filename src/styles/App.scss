@@ -28,9 +28,19 @@ menu {
       padding: .5em;
       min-width: 8em;
       transition: .2s all;
+      cursor: pointer;
     }
 
-    :disabled {
+    input {
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: black;
+      color: white;
+    }
+    :disabled:hover {
+      background-color: white;
     }
   }
 }

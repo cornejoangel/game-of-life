@@ -155,7 +155,7 @@ const App = () => {
 
       if (current.on && (onNeighbors < 2 || onNeighbors > 3)) {
         tilesToChange.push(current);
-      } else if (onNeighbors === 3) {
+      } else if (!current.on && onNeighbors === 3) {
         tilesToChange.push(current);
       }
     }
@@ -172,7 +172,6 @@ const App = () => {
 
     if (singleStep) {
       stillPlaying = false;
-      console.log('now false!');
       return;
     }
     setPlaying(stillPlaying);

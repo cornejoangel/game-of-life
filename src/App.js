@@ -5,6 +5,7 @@ import StepButton from './components/StepButton';
 import PlayButton from './components/PlayButton';
 import StopButton from './components/StopButton';
 import ResetButton from './components/ResetButton';
+import PlayPauseButton from './components/PlayPauseButton';
 import './styles/normalize.css';
 import './styles/App.scss';
 
@@ -213,6 +214,7 @@ const App = () => {
       toggleCheck={toggleCheck}
     />
   );
+
   const step = (
     <StepButton
       gameOfLife={gameOfLife}
@@ -222,17 +224,6 @@ const App = () => {
       singleStep
     />
   );
-
-  const play = (
-    <PlayButton
-      gameOfLife={gameOfLife}
-      maxX={xLimit}
-      maxY={yLimit}
-      singleStep={false}
-    />
-  );
-
-  const stop = <StopButton stopGame={stopGame} />;
 
   const reset = <ResetButton resetGame={resetGame} />;
 
@@ -249,15 +240,23 @@ const App = () => {
     />
   );
 
+  const playPause = (
+    <PlayPauseButton
+      playing={playing}
+      stopGame={stopGame}
+      gameOfLife={gameOfLife}
+      maxX={xLimit}
+      maxY={yLimit}
+      singleStep={false}
+    />
+  );
+
   let page = '';
   page = (
     <main>
       <menu>
         <li>{step}</li>
-        <li>
-          {!playing && play}
-          {playing && stop}
-        </li>
+        <li>{playPause}</li>
         <li>{reset}</li>
         <li>{speedInput}</li>
         <li>{speed / 1000}s / generation</li>

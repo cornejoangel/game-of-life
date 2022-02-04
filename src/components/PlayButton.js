@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { MdOutlinePlayArrow, MdPlayArrow } from 'react-icons/md';
 
 const PlayButton = (props) => {
   const { gameOfLife, maxX, maxY, singleStep } = props;
@@ -10,7 +11,8 @@ const PlayButton = (props) => {
       className="play"
       onClick={() => gameOfLife(maxX, maxY, singleStep)}
     >
-      {'>'}
+      {/* <MdOutlinePlayArrow className="play-button" /> */}
+      <MdPlayArrow className="play-button" />
     </button>
   );
   return play;

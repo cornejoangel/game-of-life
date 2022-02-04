@@ -43,4 +43,9 @@ menu {
       background-color: white;
     }
   }
+
+  li:last-child {
+    font-size: 5em;
+    padding: 0;
+  }
 }

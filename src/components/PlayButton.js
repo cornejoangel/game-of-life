@@ -11,8 +11,8 @@ const PlayButton = (props) => {
       className="play"
       onClick={() => gameOfLife(maxX, maxY, singleStep)}
     >
-      {/* <MdOutlinePlayArrow className="play-button" /> */}
-      <MdPlayArrow className="play-button" />
+      {/* <MdOutlinePlayArrow className="play-svg" /> */}
+      <MdPlayArrow className="play-svg" />
     </button>
   );
   return play;

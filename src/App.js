@@ -2,8 +2,6 @@ import { React, useState, useRef } from 'react';
 import SetupTiles from './modules/SetupTIles';
 import Grid from './components/Grid';
 import StepButton from './components/StepButton';
-import PlayButton from './components/PlayButton';
-import StopButton from './components/PauseButton';
 import ResetButton from './components/ResetButton';
 import PlayPauseButton from './components/PlayPauseButton';
 import './styles/normalize.css';

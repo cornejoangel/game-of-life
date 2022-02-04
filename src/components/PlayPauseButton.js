@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { MdOutlinePlayArrow, MdPlayArrow, MdPause } from 'react-icons/md';
 
 const PlayPauseButton = (props) => {
-  const { playing, stopGame, gameOfLife, maxX, maxY, singleStep } = props;
+  const { playing, pauseGame, gameOfLife, maxX, maxY, singleStep } = props;
   return (
     <button
       type="button"
-      className={`${playing ? 'stop' : 'play'}`}
+      className={`${playing ? 'pause' : 'play'}`}
       onClick={
-        playing ? () => stopGame() : () => gameOfLife(maxX, maxY, singleStep)
+        playing ? () => pauseGame() : () => gameOfLife(maxX, maxY, singleStep)
       }
     >
       {playing ? (
@@ -23,7 +23,7 @@ const PlayPauseButton = (props) => {
 
 PlayPauseButton.propTypes = {
   playing: PropTypes.bool,
-  stopGame: PropTypes.func,
+  pauseGame: PropTypes.func,
   gameOfLife: PropTypes.func,
   maxX: PropTypes.number,
   maxY: PropTypes.number,
